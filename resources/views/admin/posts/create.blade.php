@@ -35,7 +35,18 @@
                     @enderror   
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3 form-group">
+                    <h6 class="mb-3">Tecnologie</h6>
+
+                    @foreach ($technologies as $technology)
+                    <span class="mx-2">
+                        <input type="checkbox" id="tech-{{$technology->id}}" name="technologies[]" value="{{$technology->id}}">
+                        <label for="tech-{{$technology->id}}">{{$technology->name}}</label>
+                    </span>
+                    @endforeach
+                </div>
+
+                <div class="mb-3">
                     <label for="content">Contenuto</label>
                     <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror" cols="30" rows="10">{{old('content')}}</textarea>
                     @error('content')
@@ -46,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="btn-container d-flex justify-content-end">
+            <div class="btn-container d-flex justify-content-end mb-4">
                 <button type="submit" class="btn btn-primary">Aggiungi</button>
             </div>
 

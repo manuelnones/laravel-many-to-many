@@ -3,7 +3,12 @@
 @section('content')
 <div class="container text-center mt-4">
     <h1>{{$post->title}}</h1>
-    <span>Categoria: {{$post->type->name ?? 'nessuna'}}</span>
+    <span class="px-4">Categoria: {{$post->type->name ?? 'nessuna'}}</span>
+    <div class="d-flex mt-4 gap-2">
+        @foreach ($post->technologies as $technology)
+        <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+        @endforeach
+    </div>
     <hr>
 </div>
 <p>{{$post->content}}</p>

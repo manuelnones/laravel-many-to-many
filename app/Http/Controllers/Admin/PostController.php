@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,8 +31,9 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin/posts/create', compact('types'));
+        return view('admin/posts/create', compact('types', 'technologies'));
     }
 
     /**
@@ -53,6 +55,10 @@ class PostController extends Controller
         $newPost->slug = Str::slug($newPost->title, '-');
 
         $newPost->save();
+
+        if(array_key_exists('technologies', $formData)) {
+            $newPost->technologies()->attach($formData['technologies']);
+        }
 
         return redirect()->route('admin.posts.show', $newPost);
     }
@@ -77,8 +83,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin/posts/edit', compact(['post', 'types']));
+        return view('admin/posts/edit', compact(['post', 'types', 'technologies']));
     }
 
     /**
@@ -97,6 +104,14 @@ class PostController extends Controller
         $post->slug = Str::slug($formData['title'], '-');
 
         $post->update($formData);
+
+        if(array_key_exists('technologies', $formData)) {
+            $post->technologies()->sync($formData['technologies']);
+
+        } else {
+            $post->technologies()->detach();
+            
+        }
 
         return redirect()->route('admin.posts.index', $post);
     }

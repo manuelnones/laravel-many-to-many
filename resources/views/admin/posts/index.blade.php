@@ -6,6 +6,7 @@
             <th>Titolo</th>
             <th>Contenuto</th>
             <th>Slug</th>
+            <th>Tecnologie</th>
             <th></th>
         </thead>
         <tbody>
@@ -14,6 +15,11 @@
                 <td>{{$post->title}}</td>
                 <td>{{$post->content}}</td>
                 <td>{{$post->slug}}</td>
+                <td>
+                    @foreach ($post->technologies as $technology)
+                    <span class="mx-1">{{$technology->name}}</span>
+                    @endforeach
+                </td>
                 <td>
                     <a href="{{route('admin.posts.show', $post)}}"><i class="fa-solid fa-arrow-up-right-from-square mx-4"></i></a>
                 </td>
