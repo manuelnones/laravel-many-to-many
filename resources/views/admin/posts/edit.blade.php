@@ -26,7 +26,7 @@
                     <input type="file" id="post_image" name="post_image" class="form-control @error('post_image') is-invalid @enderror">
                     @error('post_image')
                         <div class="invalid-feedback">
-                            {{$massage}}
+                            {{$message}}
                         </div>
                     @enderror
                 </div>
