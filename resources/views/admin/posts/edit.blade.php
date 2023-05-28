@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container">
-        <form action="{{route('admin.posts.update', $post)}}" method="POST">
+        <form action="{{route('admin.posts.update', $post)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -17,6 +17,16 @@
                     @error('title')
                         <div class="invalid-feedback">
                             {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="post_image">Immagine post</label>
+                    <input type="file" id="post_image" name="post_image" class="form-control @error('post_image') is-invalid @enderror">
+                    @error('post_image')
+                        <div class="invalid-feedback">
+                            {{$massage}}
                         </div>
                     @enderror
                 </div>

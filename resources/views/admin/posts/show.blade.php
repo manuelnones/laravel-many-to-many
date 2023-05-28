@@ -3,14 +3,19 @@
 @section('content')
 <div class="container text-center mt-4">
     <h1>{{$post->title}}</h1>
-    <span class="px-4">Categoria: {{$post->type->name ?? 'nessuna'}}</span>
-    <div class="d-flex mt-4 gap-2">
+
+    <img src="{{asset('storage/' . $post->post_image)}}" alt="" class="w-50 h-50 my-4">
+
+    <div class="px-4">Categoria: {{$post->type->name ?? 'nessuna'}}</div>
+
+    <div class="d-flex justify-content-center mt-3 gap-2">
         @foreach ($post->technologies as $technology)
         <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
         @endforeach
     </div>
     <hr>
 </div>
+
 <p>{{$post->content}}</p>
 
 <div class="btn-container d-flex justify-content-center gap-4 m-5">
