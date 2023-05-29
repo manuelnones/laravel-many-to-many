@@ -4,7 +4,9 @@
 <div class="container text-center mt-4">
     <h1>{{$post->title}}</h1>
 
+    @if ($post->post_image)
     <img src="{{asset('storage/' . $post->post_image)}}" alt="" class="w-50 h-50 my-4">
+    @endif
 
     <div class="px-4">Categoria: {{$post->type->name ?? 'nessuna'}}</div>
 
